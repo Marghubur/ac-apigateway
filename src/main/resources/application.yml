@@ -1,0 +1,74 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: apigateway-hiringbell-service
+  cloud:
+    kubernetes:
+      enabled: true
+    loadbalancer:
+      mode: SERVICE
+    discovery:
+      all-namespaces: true
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: coreservice-service
+          uri: lb://coreservice-service
+          predicates:
+            - Path=/api/core/**
+          filters:
+            - AuthenticationFilter
+        - id: coreservice-service
+          uri: lb://coreservice-service
+          predicates:
+            - Path=/resources/**
+          filters:
+            - AuthenticationFilter
+        - id: authenticator-service
+          uri: lb://authenticator-service
+          predicates:
+            - Path=/api/oauth/**
+          filters:
+            - AuthenticationFilter
+        - id: btchatstream-service
+          uri: lb://btchatstream-service
+          predicates:
+            - Path=/hb/api/chat/**
+#          filters:
+#            - RewritePath=/chat, /chat
+            # - RewritePath=/chat/(?<segment>.*), /${segment}
+
+  profiles:
+    active: ${profile:prod}
+  webflux:
+    static-path-pattern: "/resources/**"
+
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2MB
+      max-file-size: 10MB
+      max-request-size: 12MB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
