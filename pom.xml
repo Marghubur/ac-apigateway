@@ -116,7 +116,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>hiringbel_apigateway</finalName>
+		<finalName>axilcorps_apigateway</finalName>
 	</build>
 
 </project>
