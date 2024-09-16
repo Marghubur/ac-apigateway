@@ -40,13 +40,6 @@ spring:
             - Path=/api/oauth/**
           filters:
             - AuthenticationFilter
-        - id: btchatstream-service
-          uri: lb://btchatstream-service
-          predicates:
-            - Path=/hb/api/chat/**
-#          filters:
-#            - RewritePath=/chat, /chat
-            # - RewritePath=/chat/(?<segment>.*), /${segment}
 
   profiles:
     active: ${profile:prod}
