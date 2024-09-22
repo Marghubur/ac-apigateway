@@ -4,7 +4,7 @@ env:
 spring:
   datasource:
     driver: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://178.16.138.169:3308/ems_master
+    url: jdbc:mysql://178.16.138.169:3308/axilcorps
     username: root
     password: live@Bottomhalf_001
 

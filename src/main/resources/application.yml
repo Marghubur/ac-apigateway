@@ -23,19 +23,19 @@ spring:
           enabled: true
       routes:
         - id: coreservice-service
-          uri: lb://coreservice-service
+          uri: lb://axilcorps-api-service
           predicates:
             - Path=/api/core/**
           filters:
             - AuthenticationFilter
         - id: coreservice-service
-          uri: lb://coreservice-service
+          uri: lb://axilcorps-api-service
           predicates:
             - Path=/resources/**
           filters:
             - AuthenticationFilter
         - id: authenticator-service
-          uri: lb://authenticator-service
+          uri: lb://axilcorps-auth-service
           predicates:
             - Path=/api/oauth/**
           filters:
