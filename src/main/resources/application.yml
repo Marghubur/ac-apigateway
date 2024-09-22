@@ -28,10 +28,10 @@ spring:
             - Path=/api/core/**
           filters:
             - AuthenticationFilter
-        - id: coreservice-service
-          uri: lb://axilcorps-api-service
+        - id: filemanager-service
+          uri: lb://filemanager-service
           predicates:
-            - Path=/resources/**
+            - Path=/Files/ApplicationFiles/axilcorps/**
           filters:
             - AuthenticationFilter
         - id: authenticator-service
